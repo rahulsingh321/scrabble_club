@@ -1,0 +1,25 @@
+# PostgreSQL. Versions 13.0 and up are supported.
+#   gem install pg
+#
+#   Ensure the pg gem is defined in your Gemfile
+#   gem 'pg'
+#
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username:
+  password:
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: scrabble_club_development
+
+test:
+  <<: *default
+  database: scrabble_club_test
+
+production:
+  <<: *default
+  database: scrabble_club_production
