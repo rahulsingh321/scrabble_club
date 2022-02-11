@@ -1,6 +1,12 @@
 class MatchesController < ApplicationController
+  before_action :find_game
+
   def new
     @match = Match.new
+
+    2.times do
+      @match.participants.build
+    end
   end
 
   def create
@@ -9,16 +15,16 @@ class MatchesController < ApplicationController
     if @match.save
       redirect_back(fallback_location: root_path, notice: 'Match successfully updated.')
     else
-      render :new
+      flash[:error] = @match.errors.full_messages.join(', ')
+      redirect_to new_game_match_path(@game, @match)
     end
   end
 
-  def destroy
-    @match.destroy
-    redirect_back(fallback_location: root_path, notice: 'Match successfully destroyed.')
-  end
-
   private
+
+  def find_game
+    @game = Game.find_by(id: params[:game_id])
+  end
 
   def match_params
     params.require(:match).permit(:name, participants_attributes: [:player_id, :game_id, :match_id, :score])

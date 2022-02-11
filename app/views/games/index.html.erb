@@ -11,7 +11,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
-        <th scope="col">Actions</th>
+        <th scope="col-4">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -21,9 +21,11 @@
           <td><%= game.title %></td>
           <td><%= game.description %></td>
           <td>
-            <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-sm btn-primary' %><br>
-            <%= link_to 'Destroy', game_path(game), method: :destroy, class: 'btn btn-sm btn-danger' %>
-            <%= link_to 'Create Match', new_game_match_path(game), class: 'btn btn-sm btn-success' %>
+            <div class="actions d-flex justify-content-around">
+              <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-sm btn-primary' %><br>
+              <%= link_to 'Destroy', game_path(game), method: :destroy, class: 'btn btn-sm btn-danger' %>
+              <%= link_to 'Create Match', new_game_match_path(game), class: 'btn btn-sm btn-success' %>
+            </div>
           </td>
         </tr>
       <% end %>

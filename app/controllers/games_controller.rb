@@ -15,7 +15,8 @@ class GamesController < ApplicationController
     if @game.save
       redirect_to games_path, notice: 'Game successfully created.'
     else
-      render :new
+      flash[:error] = @game.errors.full_messages.join(', ')
+      redirect_to new_game_path(@game)
     end
   end
 
@@ -23,7 +24,8 @@ class GamesController < ApplicationController
     if @game.update(game_params)
       redirect_to games_path, notice: 'Game successfully updated.'
     else
-      render :edit
+      flash[:error] = @game.errors.full_messages.join(', ')
+      redirect_to edit_game_path(@game)
     end
   end
 

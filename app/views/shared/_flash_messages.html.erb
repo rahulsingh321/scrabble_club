@@ -1,0 +1,6 @@
+<% flash.each do |type, msg| %>
+  <% alert_class = type == 'error' ? 'danger' : 'info' %>
+  <div class="mt-2 alert alert-<%= alert_class %>">
+    <%= msg %>
+  </div>
+<% end %>

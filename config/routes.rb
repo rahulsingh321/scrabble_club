@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'leader_board#show'
 
   resources :games do
-    resources :matches
+    resources :matches, only: [:new, :create]
   end
 
   resources :players

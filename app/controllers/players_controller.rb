@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_action :find_player, except: %i[new index create]
 
   def index
-    @players = Player.all
+    @players = Player.all.order('updated_at DESC')
   end
 
   def show
@@ -23,7 +23,8 @@ class PlayersController < ApplicationController
     if @player.save
       redirect_to players_path, notice: 'Player successfully created.'
     else
-      render :new
+      flash[:error] = @player.errors.full_messages.join(', ')
+      redirect_to new_player_path(@player)
     end
   end
 
@@ -31,7 +32,8 @@ class PlayersController < ApplicationController
     if @player.update(player_params)
       redirect_to players_path, notice: 'Player successfully updated.'
     else
-      render :edit
+      flash[:error] = @player.errors.full_messages.join(', ')
+      redirect_to edit_player_path(@player)
     end
   end
 

@@ -1,26 +1,22 @@
-<%= form_with(model: [@game, @match]) do |f| %>
+<%= form_with(model: @match, url: [@game, @match]) do |f| %>
   <div class="row g-3">
     <div class="col-sm-12">
       <%= f.label :name, class: 'form-label' %>
       <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
     </div>
-    <div class="col-sm-6">
-      <%= f.label :players, class: 'form-label' %>
-      <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name' %>
-    </div>
-    <div class="col-sm-6">
-      <%= f.label :nickname, class: 'form-label' %>
-      <%= f.text_field :nickname, class: 'form-control', placeholder: 'Nickname' %>
-    </div>
-    <div class="col-12">
-      <%= f.label :email, class: 'form-label' %>
-      <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
-    </div>
-    <div class="col-12">
-      <%= f.label :phone, class: 'form-label' %>
-      <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
-    </div>
+
+    <%= f.fields_for :participants, @participants do |participant_form| %>
+      <div class="col-sm-6">
+        <%= participant_form.label :player_id, "Player #{participant_form.index+1}", class: 'form-label' %>
+        <%= participant_form.select :player_id, options_for_select(Player.pluck(:nick_name, :id)) , {}, class: 'form-control', prompt: 'Players' %>
+      </div>
+      <div class="col-sm-6">
+        <%= participant_form.label :score, class: 'form-label' %>
+        <%= participant_form.number_field :score, class: 'form-control', placeholder: 'Score' %>
+      </div>
+    <% end %>
   </div>
 
   <%= f.submit 'Submit', class: 'mt-2 btn btn-primary' %>
+  <%= link_to 'Back', games_path, class: 'mt-2 btn btn-secondary' %>
 <% end %>
