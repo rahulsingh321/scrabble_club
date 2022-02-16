@@ -4,11 +4,7 @@
 
 This is sample application of a scrabble game. It includes the players the informations, games informations and their performance on the matches.
 
-It generates the leader boards for the top 10 performing
-
-A scrabble club requires a system to store members’ information and provide leader boards to show their top performing players.
-
-For members we would want to store information such as the date they joined the club and their contact details.
+It generates the leader boards for the top 10 performing players.
 
 All recorded scrabble games are head to head matches between 2 players, the player with the highest score at the end of the game wins.
 
