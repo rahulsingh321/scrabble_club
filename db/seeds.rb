@@ -13,11 +13,12 @@
   puts "Player #{player.first_name} created!"
 end
 
+# Games
 3.times do
   game = Game.create(title: Faker::Game.title, description: Faker::Lorem.paragraph)
   puts "Game #{game.title} created!"
 
-  # Matches
+  # Game with matches
   players = Player.all.sample(2)
   10.times do |i|
     attrs = [{ game_id: game.id, player_id: players[0].id, score: rand(1..100) },
