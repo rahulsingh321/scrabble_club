@@ -10,50 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_165815) do
-
+ActiveRecord::Schema.define(version: 20_220_206_165_815) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "games", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'games', force: :cascade do |t|
+    t.string 'title'
+    t.text 'description'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "matches", force: :cascade do |t|
-    t.string "name"
-    t.bigint "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_matches_on_game_id"
+  create_table 'matches', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'game_id'
+    t.integer 'winner_player_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['game_id'], name: 'index_matches_on_game_id'
   end
 
-  create_table "participants", force: :cascade do |t|
-    t.decimal "score", precision: 5, scale: 2
-    t.bigint "game_id"
-    t.bigint "player_id"
-    t.bigint "match_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_participants_on_game_id"
-    t.index ["match_id"], name: "index_participants_on_match_id"
-    t.index ["player_id"], name: "index_participants_on_player_id"
+  create_table 'participants', force: :cascade do |t|
+    t.decimal 'score', precision: 5, scale: 2
+    t.bigint 'game_id'
+    t.bigint 'player_id'
+    t.bigint 'match_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['game_id'], name: 'index_participants_on_game_id'
+    t.index ['match_id'], name: 'index_participants_on_match_id'
+    t.index ['player_id'], name: 'index_participants_on_player_id'
   end
 
-  create_table "players", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "nick_name"
-    t.string "email"
-    t.string "phone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'players', force: :cascade do |t|
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'nick_name'
+    t.string 'email'
+    t.string 'phone'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  add_foreign_key "matches", "games"
-  add_foreign_key "participants", "games"
-  add_foreign_key "participants", "matches"
-  add_foreign_key "participants", "players"
+  add_foreign_key 'matches', 'games'
+  add_foreign_key 'participants', 'games'
+  add_foreign_key 'participants', 'matches'
+  add_foreign_key 'participants', 'players'
 end

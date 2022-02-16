@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'leader_board#show'
 
   resources :games do
-    resources :matches, only: [:new, :create]
+    resources :matches, only: %i[new create index]
   end
 
   resources :players
