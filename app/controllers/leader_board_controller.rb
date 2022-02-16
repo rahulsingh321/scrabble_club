@@ -1,6 +1,13 @@
 class LeaderBoardController < ApplicationController
+  MIN_MATCH_LIMIT = 10
+
   def show
-    # players_ids = Player.joins(:participants).group('players.id').having("count(participants.id)>=10")
-    # @players = Player.where(id: players_ids).includes(:participants).order("participants.score desc").limit(10)
+    @top_performers = Player.joins(:participants).select('
+                     players.first_name,
+                     AVG(participants.score) as average_score,
+                     COUNT(participants.id) as number_of_matches')
+                            .group('players.id')
+                            .having('COUNT(participants.id) >= ?', MIN_MATCH_LIMIT)
+                            .limit(10)
   end
 end

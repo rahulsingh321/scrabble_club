@@ -1,6 +1,10 @@
 class MatchesController < ApplicationController
   before_action :find_game
 
+  def index
+    @matches = @game.matches
+  end
+
   def new
     @match = Match.new
 
@@ -27,6 +31,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:name, participants_attributes: [:player_id, :game_id, :match_id, :score])
+    params.require(:match).permit(:name, participants_attributes: %i[player_id game_id match_id score])
   end
 end

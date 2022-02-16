@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Profile stats</h1>
+</div>
+
+<div class="row g-3">
+  <div class="col-sm-6">
+    <strong><%= label_tag :first_name, 'First Name: ', class: 'form-label' %></strong>
+    <%= @player.first_name %>
+  </div>
+  <div class="col-sm-6">
+    <strong><%= label_tag :last_name, 'Last Name: ', class: 'form-label' %></strong>
+    <%= @player.last_name %>
+  </div>
+  <div class="col-12">
+    <strong><%= label_tag :phone, 'Phone: ', class: 'form-label' %></strong>
+    <%= @player.phone %>
+  </div>
+  <div class="col-12">
+    <strong><%= label_tag :email, 'Email: ', class: 'form-label' %></strong>
+    <%= @player.email %>
+  </div>
+  <div class="col-12">
+    <strong><%= label_tag :win_count, 'Number of wins: ', class: 'form-label' %></strong>
+    <%= @stats.present? ? @stats.number_of_wins : 0 %>
+  </div>
+  <div class="col-12">
+    <strong><%= label_tag :total_losses, 'Number of losses: ', class: 'form-label' %></strong>
+    <%= @stats.present? ? @stats.number_of_losses : 0 %>
+  </div>
+
+  <div class="col-12">
+    <strong><%= label_tag :average_score, 'Average Score: ', class: 'form-label' %></strong>
+    <%= @stats.present? ? @stats.average_score : 0 %>
+  </div>
+
+  <div class="col-12">
+    <strong><%= label_tag :highest_score, 'Highest Score: ', class: 'form-label' %></strong>
+    <%= @stats.present? ? @stats.highest_score : 0 %><br>
+
+    <% record = @player.max_score_record %>
+
+    <i>Highest Score For Game:
+      <strong><%= record&.game&.title %></strong>
+    </i><br>
+
+    <i>Highest Score At :
+      <strong><%= record&.match&.created_at %></strong>
+    </i><br>
+
+    <i>Highest Score Against:
+      <strong><%= record&.match.participants.where.not(player_id: @player.id).take&.player&.first_name if record&.match.present? %></strong>
+    </i><br>
+  </div>
+
+  <%= link_to 'Back', players_path, class: 'btn btn-secondary' %>
+</div>
+

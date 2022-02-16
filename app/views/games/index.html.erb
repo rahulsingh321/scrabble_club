@@ -24,6 +24,7 @@
             <div class="actions d-flex justify-content-around">
               <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-sm btn-primary' %><br>
               <%= link_to 'Destroy', game_path(game), method: :destroy, class: 'btn btn-sm btn-danger' %>
+              <%= link_to 'View Matches', game_matches_path(game), class: 'btn btn-sm btn-secondary' %>
               <%= link_to 'Create Match', new_game_match_path(game), class: 'btn btn-sm btn-success' %>
             </div>
           </td>

@@ -6,11 +6,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    games = @player.participants.pluck(:game_id).uniq
-    @win = 0; @los = 0
-    Game.where(id: games).each do |game|
-      game.participants.order('score DESC').first.player_id == @player.id ? @win +=1 : @los +=1
-    end
+    @stats = @player.stats
   end
 
   def new

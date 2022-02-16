@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2"><%= "Matches of Game -  #{@game.title}" %></h1>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Player 1</th>
+        <th scope="col">Player 2</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @matches.each_with_index do |match, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= match.name %></td>
+          <td><%= match.participants.first.player.first_name %></td>
+          <td><%= match.participants.last.player.first_name %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
